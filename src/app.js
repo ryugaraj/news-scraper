@@ -6,7 +6,7 @@ const toi_url = 'https://timesofindia.indiatimes.com'
 const toi_url_sports = 'https://timesofindia.indiatimes.com/sports'
 const toi_url_business = 'https://timesofindia.indiatimes.com/business'
 
-axios.get(url)
+axios.get(toi_url)
     .then(res=>{
         const articles = [];
         const $ = cheerio.load(res.data);
@@ -19,6 +19,7 @@ axios.get(url)
                 })
             }
         })
+        console.log(articles)
     })
     .catch(e=>{
         console.log(e);
@@ -30,14 +31,13 @@ axios.get(toi_url_sports)
         const articles = [];
         const $ = cheerio.load(res.data);
         $('.w_img').each((i,elem)=>{
-            if(true){
-                articles.push({
-                    title: $(elem).attr('title'),
-                    link : 'https://timesofindia.indiatimes.com' + $(elem).attr('href'),
-                    image : $(elem).find('img').attr('src')
-                })
-            }
+            articles.push({
+                title: $(elem).attr('title'),
+                link : 'https://timesofindia.indiatimes.com' + $(elem).attr('href'),
+                image : $(elem).find('img').attr('src')
+            })
         })
+        console.log(articles)
     })
     .catch(e=>{
         console.log(e);
