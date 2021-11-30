@@ -75,9 +75,16 @@ axios.get(toi_url_business)
         const articles = [];
         const $ = cheerio.load(res.data);
         $('.w_img').each((i,elem)=>{
+            var link1 = ""
+            if($(elem).attr('href').startsWith('/http')){
+                link1 = $(elem).attr('href')
+            }
+            else{
+                link1 = 'https://timesofindia.indiatimes.com' + $(elem).attr('href')
+            }
             articles.push({
                 title: $(elem).attr('title'),
-                link : $(elem).attr('href'),
+                link : link1,
                 image : $(elem).find('img').attr('src')
             })
         })
